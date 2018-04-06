@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Producto</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menú">
+                            <p:menuitem value="Productos" url="http://localhost:8080/todo1-kardex-web/pages/producto.jsf" />
+                            <p:menuitem value="Empleados" url="http://localhost:8080/todo1-kardex-web/pages/empleado.jsf" />                            
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="frmPrincipal" >
+                        <p:growl id="growl" showDetail="true" sticky="true" />  
+
+                        <p:panel header="Cliente">
+                            <p:toolbar> 
+                                <f:facet name="left">
+                                    <p:commandButton type="button" value="New" icon="ui-icon-document" />
+                                </f:facet>
+                            </p:toolbar>
+                            <p:panel>
+                                <h:panelGrid>
+                                    <p:outputLabel value="Buscar Cliente:"></p:outputLabel> 
+                                    <p:inputText  required="true"></p:inputText>
+                                </h:panelgrid>
+                            </p:panel>  
+                        </p:panel>
+
+
+                      
+
+
+
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </p:layout>
+
+            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                <h:outputText value="This is a Modal Dialog." />
+            </p:dialog>
+
+
+
+
+
+            <p:dialog header="Producto" dynamic="true" id="dialogProducto" widgetVar="dialogProducto" modal="true" showEffect="fade" hideEffect="fade"  resizable="false">
+                <div align="center">
+                    <h:form id="frmProducto">
+                        <p:panel id="pnlProducto" header="Producto">
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="Id:"></p:outputLabel>
+                                <p:inputText value="#{productoControlador.productoBB.producto.idproducto}" disabled="true"></p:inputText>
+                                <p:outputLabel value="Nombre:"></p:outputLabel>
+                                <p:inputText value="#{productoControlador.productoBB.producto.prNombre}" autocomplete="off"></p:inputText>
+                                <p:outputLabel value="Precio:"></p:outputLabel>
+                                <p:inputText value="#{productoControlador.productoBB.producto.prPrecio}" autocomplete="off"></p:inputText>
+                                <p:outputLabel value="Stock:"></p:outputLabel>
+                                <p:inputText value="#{productoControlador.productoBB.producto.prStock}" autocomplete="off"></p:inputText>
+                                <p:outputLabel value="Tipo Producto:"/>
+                                <p:selectOneMenu value="#{productoControlador.productoBB.tipoproducto.idtipoproducto}" required="true">
+                                    <f:selectItem itemLabel="Escoja una opción" itemValue=""></f:selectItem>
+                                    <f:selectItems value="#{productoControlador.productoBB.tipoproductos}" var="tp1" itemValue="#{tp1.idtipoproducto}"
+                                                   itemLabel="#{tp1.tpNombre}"                                                        
+                                                   ></f:selectItems>
+
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                        </p:panel>
+                        <p:separator style="height:5px" />
+
+                        <p:commandButton value="Guardar" action="#{productoControlador.guardar()}" update=":frmProducto,:frmPrincipal:" icon="ui-icon-disk" title="Guardar" />
+                        <p:commandButton value="Cancelar"  update="dialogProducto" icon="ui-icon-close" title="Cancelar" />
+                    </h:form>
+                </div>
+            </p:dialog>
+
+            <p:dialog header="Mensaje" id="dlgConfirmacion" widgetVar="dlgConfirmacion" modal="true" showEffect="fade" hideEffect="fade" resizable="false" closable="false" width="300px">
+                <h:panelGrid columns="1" style="margin:0 auto" >
+                    <center>
+                        <h:panelGrid columns="2">
+
+                            <h:graphicImage value="/resources/img/plantilla/pregunta.jpg" width="50" height="50" />
+                            <p:outputLabel value="¿Desea Guardar el Registro?"/>
+
+                        </h:panelGrid>
+                        <br/>
+
+                        <h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto">
+                            <p:commandButton value="Aceptar" icon="ui-icon-check" action ="#{productoControlador.guardarProducto()}" update="dialogProducto, dlgConfirmacion, :#{p:component('frmPrincipal')}" title="Aceptar"/>
+                            <p:commandButton value="Cancelar" icon="ui-icon-close" update="dlgConfirmacion" title="Cancelar"/>
+                        </h:panelGrid>
+                    </center>
+                </h:panelGrid>
+            </p:dialog>
+
+        </h:body>
+
+    </f:view>
+</html>
+

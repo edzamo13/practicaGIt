@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Todo1</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <div>
+                <p>Autenticación de usuarios Kardex Todo1.</p>
+
+                <img src="../../resources/imagen/logo_todo1.jpg" alt=""/>
+            </div>
+
+            <div align="center" >
+                <h:form id="frmLogin" >
+                 
+                   <p:growl id="growl" showDetail="true" sticky="true" />  
+ 
+                   <p:panel id="panelLogin" header="Login" >
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Ingrese el Usuario:"></p:outputLabel>
+                            <br/>
+                            <p:inputText id="usuario" value="#{loginControlador.loginBB.usuario.usuario}" required="true"
+                                         autocomplete="off"></p:inputText>
+                            <p:message for="usuario"  />
+                            <p:outputLabel value="Ingrese Password:"></p:outputLabel>
+                            <br/>
+                            <p:password id="contrasenia" value="#{loginControlador.loginBB.usuario.contrasenia}" required="true"
+                                         autocomplete="off"></p:password>
+                            <p:message for="contrasenia" />
+
+                        </h:panelGrid>
+                        <p:commandButton value="Ingresar" action="#{loginControlador.validarCredenciales()}" 
+                                         update="growl,frmLogin"></p:commandButton>
+                        <p:commandButton value="Cancelar"></p:commandButton>
+                    </p:panel>
+
+
+
+                </h:form>
+            </div>
+
+
+        </h:body>
+
+    </f:view>
+</html>
+
