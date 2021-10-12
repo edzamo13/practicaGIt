@@ -1,0 +1,9 @@
+Nuevo repositorio $ git flow init
+
+Merge de rama develop con master
+
+$ git checkout master
+
+$ git merge --no-ff develop
+
+Subir rama al repositorio remoto $ git push origin master
