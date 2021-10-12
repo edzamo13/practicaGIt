@@ -7,3 +7,6 @@ $ git checkout master
 $ git merge --no-ff develop
 
 Subir rama al repositorio remoto $ git push origin master
+
+
+Cambio desde la Master.
