@@ -29,4 +29,7 @@ versión del archivo
 $ git commit -m "[descriptive message]"
 Registra las instantáneas
 
-s
+$ git show 
+
+muestra la ultima version
+
